@@ -1,6 +1,4 @@
 /*
-$Xorg: XRecord.c,v 1.4 2001/02/09 02:04:00 xorgcvs Exp $
-
 XRecord.c - client-side library for RECORD extension
 
 Copyright 1995, 1998  The Open Group
@@ -50,12 +48,9 @@ from The Open Group.
 /*
  * By Stephen Gildea, X Consortium, and Martha Zimet, NCD.
  */
-/* $XFree86: xc/lib/Xtst/XRecord.c,v 1.6 2002/10/16 00:37:33 dawes Exp $ */
 
 #include <stdio.h>
 #include <assert.h>
-#define NEED_EVENTS
-#define NEED_REPLIES
 #include <X11/Xlibint.h>
 #include <X11/extensions/Xext.h>
 #include <X11/extensions/extutil.h>
@@ -64,7 +59,7 @@ from The Open Group.
 
 static XExtensionInfo _xrecord_info_data;
 static XExtensionInfo *xrecord_info = &_xrecord_info_data;
-static /* const */ char *xrecord_extension_name = RECORD_NAME;
+static const char *xrecord_extension_name = RECORD_NAME;
 
 #define XRecordCheckExtension(dpy,i,val) \
     XextCheckExtension(dpy, i, xrecord_extension_name, val)
@@ -165,7 +160,7 @@ static int close_display(
 static XPointer alloc_mem_cache(void)
 {
     struct mem_cache_str *cache;
-    
+
     /* note that an error will go unnoticed */
     cache = (struct mem_cache_str *) Xmalloc(sizeof(struct mem_cache_str));
     if (cache) {
@@ -239,7 +234,7 @@ SendRange(
        xrange.errorsLast = (*range_item)->errors.last;
        xrange.clientStarted = (*range_item)->client_started;
        xrange.clientDied = (*range_item)->client_died;
- 
+
        Data(dpy, (char *)&xrange, rlen);
        range_item++;
     }
@@ -732,7 +727,7 @@ parse_reply_call_callback(
 	data = alloc_inter_data(info);
 	if (!data)
 	    return Error;
-	
+
 	data->id_base = rep->idBase;
 	data->category = rep->category;
 	data->client_swapped = rep->clientSwapped;
@@ -800,7 +795,7 @@ parse_reply_call_callback(
 	case XRecordEndOfData:
 	    datum_bytes = 0;
 	}
-	
+
 	if (datum_bytes > 0) {
 	    if (current_index + datum_bytes > rep->length << 2)
 		fprintf(stderr,
@@ -810,7 +805,7 @@ parse_reply_call_callback(
 	    /*
 	     * This assignment (and indeed the whole buffer sharing
 	     * scheme) assumes arbitrary 4-byte boundaries are
-	     * addressable. 
+	     * addressable.
 	     */
 	    data->data = reply->buf+current_index;
 	    reply->ref_count++;
@@ -818,9 +813,9 @@ parse_reply_call_callback(
 	    data->data = NULL;
 	}
 	data->data_len = datum_bytes >> 2;
-	
+
 	(*callback)(closure, data);
-	
+
 	current_index += datum_bytes;
     } while (current_index<rep->length<<2);
 
@@ -936,7 +931,7 @@ record_async_handler(
 	    Xfree(state->async);
 	    return False;
 	}
-	
+
 	_XGetAsyncData(dpy, (char *)reply->buf, buf, len,
 		       SIZEOF(xRecordEnableContextReply),
 		       rep->generic.length << 2, 0);
@@ -944,8 +939,8 @@ record_async_handler(
 	reply = NULL;
     }
 
-    status = parse_reply_call_callback(dpy, state->info, 
-				       (xRecordEnableContextReply*) rep, 
+    status = parse_reply_call_callback(dpy, state->info,
+				       (xRecordEnableContextReply*) rep,
 				       reply, state->callback, state->closure);
 
     if (status != Continue)
