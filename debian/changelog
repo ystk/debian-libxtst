@@ -1,3 +1,61 @@
+libxtst (2:1.2.1-1+deb7u1) wheezy-security; urgency=high
+
+  * integer overflow in XRecordGetContext() [CVE-2013-2063]
+
+ -- Julien Cristau <jcristau@debian.org>  Tue, 14 May 2013 20:12:48 +0200
+
+libxtst (2:1.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Split documentation to a separate package.  Mark libxtst-dev Multi-Arch:
+    same.
+  * Don't build the documentation from the build-arch target.
+  * Bump build-deps on xutils-dev, xmlto and xorg-sgml-doctools per
+    configure.ac.
+
+ -- Julien Cristau <jcristau@debian.org>  Mon, 23 Apr 2012 22:55:46 +0200
+
+libxtst (2:1.2.0-4) unstable; urgency=low
+
+  [ Julien Cristau ]
+  * Build for multiarch (closes: #639348).  Thanks, Peter Samuelson!
+  * Don't use dh_testroot in clean.
+
+  [ Steve Langasek ]
+  * Don't mark libxtst-dev Multi-Arch: same, because its documentation isn't
+    identical across architectures.
+
+ -- Steve Langasek <vorlon@debian.org>  Fri, 21 Oct 2011 20:17:23 -0700
+
+libxtst (2:1.2.0-3) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 20 Jul 2011 23:10:53 +0200
+
+libxtst (2:1.2.0-2) experimental; urgency=low
+
+  * Add libxtst6-udeb, thanks to Thibaut GIRKA (Closes: #592504). This is
+    a prerequisite for on-screen keyboard support.
+  * Update Uploaders list. Thanks, David, Andres, and Brice!
+
+ -- Cyril Brulebois <kibi@debian.org>  Thu, 24 Feb 2011 16:47:44 +0100
+
+libxtst (2:1.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump xutils-dev build-dep for new macros.
+  * Update debian/copyright from upstream COPYING.
+  * Add xmlto, xorg-sgml-doctools, and w3m build-dep for the doc.
+  * Pass --with-xmlto and --without-fop (we want html and txt only).
+  * Pass --docdir=/usr/share/doc/libxtst-dev and add this directory to
+    the libxtst-dev.install file.
+  * Switch from --list-missing to --fail-missing for additional safety.
+  * Exclude libXtst.la from dh_install accordingly.
+  * Add myself to Uploaders.
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 19 Nov 2010 14:52:30 +0100
+
 libxtst (2:1.1.0-3) unstable; urgency=low
 
   [ Julien Cristau ]
