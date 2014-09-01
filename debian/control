@@ -4,8 +4,8 @@ Priority: optional
 Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
 Uploaders: Cyril Brulebois <kibi@debian.org>
 Build-Depends:
- dpkg-dev (>= 1.16),
- debhelper (>= 5.0.0),
+ dpkg-dev (>= 1.16.1),
+ debhelper (>= 7),
  libx11-dev (>= 2:0.99.3),
  libxext-dev (>= 2:1.0.99.4),
  libxi-dev,
@@ -19,9 +19,9 @@ Build-Depends:
  xutils-dev (>= 1:7.6+2),
  quilt,
 # specs:
-  xmlto (>= 0.0.22),
-  xorg-sgml-doctools (>= 1:1.8),
-  w3m,
+ xmlto (>= 0.0.22),
+ xorg-sgml-doctools (>= 1:1.8),
+ w3m,
 Standards-Version: 3.8.3
 Vcs-Git: git://git.debian.org/git/pkg-xorg/lib/libxtst
 Vcs-Browser: http://git.debian.org/?p=pkg-xorg/lib/libxtst.git

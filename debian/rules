@@ -12,12 +12,6 @@ PACKAGE = libxtst6
 
 include debian/xsfbs/xsfbs.mk
 
-CFLAGS = -Wall -g
-ifneq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
-endif
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 	NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 	MAKEFLAGS += -j$(NUMJOBS)
@@ -48,8 +42,9 @@ build-stamp: $(STAMP_DIR)/patch
 	             --infodir=\$${prefix}/share/info $(confflags) \
 	             --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
 	             --docdir=\$${prefix}/share/doc/libxtst-dev \
+		     --disable-silent-rules \
 		     $(docflags) \
-	             CFLAGS="$(CFLAGS)" 
+		     $(shell DEB_CFLAGS_MAINT_APPEND=-Wall dpkg-buildflags --export=configure)
 	cd build && $(MAKE)
 	>$@
 
@@ -69,7 +64,7 @@ clean: xsfclean
 install: build-stamp
 	dh_testdir
 	dh_testroot
-	dh_clean -k
+	dh_prep
 	dh_installdirs
 
 	cd build && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
@@ -79,8 +74,8 @@ binary-arch: build-arch install
 	dh_testdir
 	dh_testroot
 	dh_installdocs -s
-	dh_install -s --sourcedir=debian/tmp --fail-missing -XlibXtst.la
-	dh_installchangelogs -s ChangeLog
+	dh_install -s --fail-missing -XlibXtst.la
+	dh_installchangelogs -s
 	dh_installman -s
 	dh_link -s
 	dh_strip -p$(PACKAGE) --dbg-package=$(PACKAGE)-dbg

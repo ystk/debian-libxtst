@@ -1,3 +1,15 @@
+libxtst (2:1.2.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/copyright: add copyright notices and licenses from the manpages and
+    specs.  Thanks, Ansgar!
+  * Bump debhelper compat level to 7.
+  * Use dpkg-buildflags.
+  * Disable silent build rules.
+  * Use dh_prep instead of dh_clean -k.
+
+ -- Julien Cristau <jcristau@debian.org>  Mon, 12 Aug 2013 20:33:03 +0200
+
 libxtst (2:1.2.1-1+deb7u1) wheezy-security; urgency=high
 
   * integer overflow in XRecordGetContext() [CVE-2013-2063]
