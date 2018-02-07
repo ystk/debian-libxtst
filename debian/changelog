@@ -1,3 +1,11 @@
+libxtst (2:1.2.2-1+deb8u1) jessie; urgency=medium
+
+  * Insufficient validation of data from the X server can cause out of
+    boundary memory access or endless loops.  Addresses CVE-2016-7951 and
+    CVE-2016-7952.
+
+ -- Julien Cristau <jcristau@debian.org>  Sat, 28 Jan 2017 15:53:24 +0100
+
 libxtst (2:1.2.2-1) unstable; urgency=low
 
   * New upstream release.
